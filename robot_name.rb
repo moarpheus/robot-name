@@ -1,8 +1,31 @@
-=begin
-Write your code for the 'Robot Name' exercise in this file. Make the tests in
-`robot_name_test.rb` pass.
+class Robot
 
-To get started with TDD, see the `README.md` file in your
-`ruby/robot-name` directory.
-=end
+  @@all_names = []
 
+  attr_reader :name
+  
+  def initialize
+    @name = generate_uniqe_name
+    @name = generate_uniqe_name
+    @@all_names << @name
+  end
+
+  def self.forget
+    @name = nil
+    @@all_names = []
+  end
+
+  def reset
+    initialize
+  end
+
+  private
+
+  def generate_uniqe_name
+    name = [*('A'..'Z')].sample(2).join.to_s + [*(0..9)].sample(3).join
+    while (@@all_names.include? name) do
+      name = [*('A'..'Z')].sample(2).join.to_s + [*(0..9)].sample(3).join      
+    end
+    name
+  end
+end
